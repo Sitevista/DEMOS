@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Brasa. Cocina de fuego</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--e:#FF5A1F;--c:#FFF1E0}
+body{background:#000;color:var(--c);font:400 18px/1.5 'Space Grotesk',sans-serif;overflow-x:hidden}
+.d{font-family:Anton,Impact,sans-serif;text-transform:uppercase;font-weight:400;line-height:.85}
+#bg{position:fixed;inset:0;background:#000;z-index:0}
+#gl{position:fixed;inset:0;z-index:5;pointer-events:none;width:100%;height:100%}
+.grain{position:fixed;inset:-50%;z-index:60;pointer-events:none;opacity:.2;mix-blend-mode:overlay;animation:g 1s steps(6) infinite;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+@keyframes g{25%{transform:translate(-4%,3%)}50%{transform:translate(3%,-4%)}75%{transform:translate(-3%,-2%)}}
+nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(24px,4vw,48px);font-size:26px;color:#fff;mix-blend-mode:difference}
+nav a{color:inherit;text-decoration:none}.nr{display:flex;gap:24px;align-items:center}
+#cntw{width:32px;height:32px;border-radius:50%;background:#fff;color:#000;font-size:18px;line-height:32px;text-align:center;overflow:hidden;display:block}
+section{position:relative}
+.pad{padding-left:clamp(24px,4vw,48px);padding-right:clamp(24px,4vw,48px)}
+.r{display:block;overflow:hidden}.r>span{display:block}
+.b{border:0;border-radius:999px;padding:16px 32px;font:400 20px Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.03em;background:var(--e);color:#000;cursor:pointer;transition:transform .25s}
+.b:hover{transform:scale(1.06)}.b:active{transform:scale(.94)}.b.k{background:#000;color:var(--c)}
+:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:40px;overflow:hidden}
+.hero h1{position:absolute;inset:12vh 0 auto;text-align:center;font-size:36vw;color:var(--e);z-index:1;pointer-events:none;user-select:none}
+.hrow{position:relative;z-index:10;display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-end}
+.hrow p.d{font-size:clamp(46px,6.5vw,96px);line-height:.95}.hrow .s{max-width:340px;display:grid;gap:20px;color:rgba(255,241,224,.8)}
+.st{min-height:100vh;display:flex;align-items:center}.st.rt{justify-content:flex-end}
+.st>div{width:48%;position:relative;z-index:10}
+.st .n{font-size:clamp(80px,9vw,140px);line-height:1}
+.ol{-webkit-text-stroke:2px var(--e);color:transparent}
+.st h2{font-size:clamp(90px,12vw,200px)}.st p.t{margin-top:24px;max-width:400px;font-size:22px;color:rgba(255,241,224,.7)}
+#menu{min-height:100vh;padding-top:96px;padding-bottom:96px;color:#000}
+#menu h2{font-size:clamp(80px,11vw,190px)}
+#fl{margin-top:40px;width:52%;position:relative;z-index:10}
+.card{border:2px solid #000;padding:24px;margin-bottom:16px;cursor:pointer;transition:transform .3s,background .3s,color .3s}
+.card:hover{transform:translateX(12px)}.card.on{background:#000;color:var(--c)}
+.card .top{display:flex;justify-content:space-between;gap:16px;font-size:clamp(28px,3.2vw,48px);line-height:1}
+.card p{margin-top:8px;max-width:440px;opacity:.8}.card .bt{margin-top:14px;display:flex;justify-content:flex-end}
+.add{background:none;color:inherit;border:2px solid currentColor;border-radius:999px;padding:6px 20px;font:400 18px Anton,Impact,sans-serif;text-transform:uppercase;cursor:pointer;transition:transform .2s}.add:active{transform:scale(.9)}
+.ing{min-height:100vh;overflow:hidden;padding-bottom:96px;padding-top:96px}
+.mq{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;justify-content:center;gap:16px;pointer-events:none}
+.mq div{display:flex;width:max-content;white-space:pre;font-size:16vw;animation:m 30s linear infinite}.mq div+div{animation-direction:reverse}
+@keyframes m{to{transform:translateX(-50%)}}
+.grid{position:relative;z-index:10;margin-top:70vh;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.grid div{border:1px solid rgba(255,241,224,.25);background:rgba(0,0,0,.7);backdrop-filter:blur(8px);padding:20px;font-size:26px;line-height:1.1;transition:transform .3s}.grid div:hover{transform:rotate(-2deg) scale(1.04)}
+.cta{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;padding-top:96px;padding-bottom:32px;color:#000}
+.cta h2{font-size:clamp(90px,14vw,240px);line-height:.82}
+#rf{position:relative;z-index:10;display:grid;gap:12px;width:100%;max-width:480px;text-align:left}
+#rf input{width:100%;border:2px solid #000;border-radius:999px;background:none;padding:14px 24px;font:inherit;color:#000}#rf input::placeholder{color:rgba(0,0,0,.6)}
+.pp{display:flex;align-items:center;justify-content:space-between;border:2px solid #000;border-radius:999px;padding:6px 8px 6px 24px}
+.pp button{width:40px;height:40px;border-radius:50%;border:0;background:#000;color:var(--c);font:400 22px Anton,sans-serif;cursor:pointer;transition:transform .2s}.pp button:active{transform:scale(.85)}
+.pp b{display:inline-block;min-width:28px;text-align:center;font:400 24px Anton,sans-serif}
+section>*:not(.mq):not(h1){position:relative;z-index:10}
+@media(max-width:800px){#gl{opacity:.55}.st>div,#fl{width:100%}.grid{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){.grain,.mq div{animation:none}}
+</style></head>
+<body>
+<div id="bg"></div><div class="grain"></div><canvas id="gl"></canvas>
+<nav class="d"><span>Brasa</span><span class="nr"><a href="#reservar">Reservar</a><span style="display:flex;gap:10px;align-items:center">Preorden <span id="cntw"><span id="cnt">0</span></span></span></span></nav>
+
+<section class="hero pad" data-jar="0,.75,0,.3" data-bg="#000000">
+  <h1 class="d" id="par">Brasa</h1>
+  <div class="hrow">
+    <p class="d"><span class="r"><span data-d=".3">Cocina de fuego lento.</span></span><span class="r"><span data-d=".45" style="color:var(--e)">Humo, brasa y sal.</span></span></p>
+    <div class="s"><p>Un restaurante de leña de encino, producto de temporada y mesa para compartir.</p><button class="b" id="go">Reservar mesa</button></div>
+  </div>
+</section>
+
+<section class="st pad" data-jar="1,.62,0,0" data-bg="#000000"><div><p class="n d ol">1</p><h2 class="d"><span class="r"><span>Fuego</span></span></h2><p class="t">Encendemos la leña de encino al amanecer y esperamos a que quede solo brasa.</p></div></section>
+<section class="st rt pad" data-jar="-1,.62,.6,0" data-bg="#000000"><div><p class="n d ol">2</p><h2 class="d"><span class="r"><span>Humo</span></span></h2><p class="t">Cada corte pasa horas en el humo. Despacio, sin atajos y sin prisa.</p></div></section>
+<section class="st pad" data-jar="1,.62,1,0" data-bg="#000000"><div><p class="n d ol">3</p><h2 class="d"><span class="r"><span>Mesa</span></span></h2><p class="t">Servimos bajo campana de cristal. Al levantarla, sale todo el aroma de golpe.</p></div></section>
+
+<section id="menu" class="pad" data-jar="1,.62,1,0" data-bg="#ff5a1f">
+  <h2 class="d"><span class="r"><span>El menú</span></span></h2>
+  <p style="margin-top:16px">Elige un plato y mira cómo se sirve. Preordénalo y lo tendremos listo en tu mesa.</p>
+  <div id="fl"></div>
+</section>
+
+<section class="ing pad" data-jar="0,.5,1,.2" data-bg="#000000">
+  <div class="mq d" id="mq"></div>
+  <div class="grid d" id="ig"></div>
+</section>
+
+<section id="reservar" class="cta pad" data-jar="1,.5,0,0" data-bg="#ff5a1f">
+  <h2 class="d"><span class="r"><span>Reserva</span></span><span class="r"><span data-d=".15">tu mesa</span></span></h2>
+  <form id="rf">
+    <input name="n" required aria-label="Nombre" placeholder="Tu nombre">
+    <input name="f" type="date" required aria-label="Fecha" id="fd">
+    <div class="pp"><span>Personas</span><span><button type="button" data-d="-1" aria-label="Menos personas">-</button><b id="pn">2</b><button type="button" data-d="1" aria-label="Más personas">+</button></span></div>
+    <p id="pre" style="font-size:15px;min-height:22px"></p>
+    <button class="b k">Reservar mesa</button>
+  </form>
+  <div style="font-size:15px;margin-top:48px"><p>Calle del Fuego 123. Martes a domingo, de 18:00 a 23:30.</p><p>&copy; 2026 Brasa. Página de demostración.</p></div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)]
+const FL=[{n:'Pulpo a la brasa',c:'#ff5a1f',p:24,d:'Papa ahumada y chimichurri de chile ancho.'},
+{n:'Costilla 12 horas',c:'#a3141b',p:32,d:'Res glaseada con ajo negro y miel quemada.'},
+{n:'Camarones al carbón',c:'#ffb000',p:28,d:'Mantequilla de mango, chile y limón persa.'},
+{n:'Hongos de encino',c:'#c98a4b',p:19,d:'Crema de maíz nixtamalizado y sal de mar.'}]
+const ING=['Chile ancho','Ajo negro','Leña de encino','Maíz nixtamalizado','Mantequilla ahumada','Limón persa','Sal de mar','Miel quemada']
+gsap.registerPlugin(ScrollTrigger)
+const calm=matchMedia('(prefers-reduced-motion:reduce)').matches
+const S={p:0,x:0,s:1,l:0,y:0}   // estado 3D: x (-1..1), escala y apertura de la campana vienen de data-jar="x,escala,apertura,altura"
+let sel=0,pre=0,pers=2,target=new THREE.Color(FL[0].c)
+
+/* ---------- DOM ---------- */
+const drawCards=()=>{$('#fl').innerHTML=FL.map((f,i)=>`<div class="card${i==sel?' on':''}" role="button" tabindex="0" aria-pressed="${i==sel}" data-i="${i}">
+<div class="top d"><span>${f.n}</span><span>$${f.p}</span></div><p>${f.d}</p><div class="bt"><button class="add">Preordenar</button></div></div>`).join('')}
+drawCards()
+$('#fl').addEventListener('click',e=>{const c=e.target.closest('.card');if(!c)return
+ if(e.target.closest('.add')){$('#cnt').textContent=++pre;$('#pre').textContent=pre+(pre==1?' plato preordenado.':' platos preordenados.');gsap.fromTo('#cnt',{y:-18,opacity:0},{y:0,opacity:1,duration:.4,ease:'back.out(3)'});return}
+ sel=+c.dataset.i;target.set(FL[sel].c);drawCards()})
+$('#fl').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList.contains('card'))e.target.click()})
+const row=ING.join('   ')+'   '
+$('#mq').innerHTML=`<div style="color:var(--e)"><span>${row}</span><span>${row}</span></div><div class="ol"><span>${row}</span><span>${row}</span></div>`
+$('#ig').innerHTML=ING.map(n=>`<div>${n}</div>`).join('')
+$('#go').onclick=()=>$('#reservar').scrollIntoView({behavior:'smooth'})
+$('#fd').min=new Date().toISOString().slice(0,10)
+$$('.pp button').forEach(b=>b.onclick=()=>{pers=Math.min(12,Math.max(1,pers+ +b.dataset.d));$('#pn').textContent=pers;gsap.fromTo('#pn',{scale:1.4},{scale:1,duration:.3})})
+$('#rf').onsubmit=e=>{e.preventDefault();const f=new FormData(e.target),fecha=new Date(f.get('f')+'T00:00').toLocaleDateString('es',{weekday:'long',day:'numeric',month:'long'})
+ const h=document.createElement('p');h.className='d';h.style.cssText='font-size:44px;line-height:1';h.textContent='Mesa solicitada'
+ const m=document.createElement('p');m.textContent=`Gracias, ${f.get('n')}. Pedimos una mesa para ${pers} el ${fecha}`+(pre?`, con ${pre} ${pre==1?'plato preordenado':'platos preordenados'}`:'')+'. Esto es una demostración: no se envió ningún dato.'
+ $('#rf').replaceChildren(h,m);gsap.from('#rf>*',{y:20,opacity:0,stagger:.12,duration:.6})}
+
+/* ---------- Escena Three.js: plato con campana de cristal ---------- */
+const R=new THREE.WebGLRenderer({canvas:$('#gl'),alpha:true,antialias:true})
+R.setPixelRatio(Math.min(devicePixelRatio,2));R.toneMapping=THREE.ACESFilmicToneMapping;R.outputEncoding=THREE.sRGBEncoding;R.toneMappingExposure=1.1
+const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(30,1,.1,50);cam.position.z=8
+const pm=new THREE.PMREMGenerator(R),es=new THREE.Scene()
+;[[-5,1,2,2,8,'#fff',6],[5,0,2,2,8,'#ff8a4c',5],[0,6,0,8,3,'#fff',3],[0,2,-5,8,3,'#ffc9a0',3]].forEach(([x,y,z,w,h,c,i])=>{
+ const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({color:new THREE.Color(c).multiplyScalar(i),side:2}));m.position.set(x,y,z);m.lookAt(0,0,0);es.add(m)})
+scene.environment=pm.fromScene(es,.04).texture
+scene.add(new THREE.AmbientLight(0xffffff,.3));const dl=new THREE.DirectionalLight(0xffffff,1.2);dl.position.set(3,4,5);scene.add(dl)
+const pl=new THREE.PointLight(0xff7a2f,2,12);scene.add(pl)
+
+const V=a=>a.map(p=>new THREE.Vector2(...p))
+const jar=new THREE.Group(),spin=new THREE.Group();jar.add(spin);jar.scale.setScalar(.001);scene.add(jar)
+const tex=(w,h,fn)=>{const c=document.createElement('canvas');c.width=w;c.height=h;fn(c.getContext('2d'));return new THREE.CanvasTexture(c)}
+// plato: loza negra vidriada con pocillo y filo naranja
+const glaze=new THREE.MeshPhysicalMaterial({color:0x0e0e0e,roughness:.35,metalness:.05,clearcoat:1,clearcoatRoughness:.08,envMapIntensity:1.3,side:2})
+spin.add(new THREE.Mesh(new THREE.LatheGeometry(V([[0,0],[1.15,0],[1.3,.035],[1.4,.1],[1.9,.16],[2.08,.3],[2.12,.345],[2.06,.35],[1.88,.23],[1.4,.14],[0,.11]]),128),glaze))
+const edge=new THREE.Mesh(new THREE.TorusGeometry(2.04,.016,10,128),new THREE.MeshStandardMaterial({color:0xff5a1f,roughness:.35}));edge.rotation.x=Math.PI/2;edge.position.y=.348;spin.add(edge)
+// salsa brillante (cambia de color con el plato elegido) y gotas
+const sauce=new THREE.MeshPhysicalMaterial({color:FL[0].c,roughness:.12,clearcoat:1,clearcoatRoughness:.04,envMapIntensity:1.5,side:2})
+spin.add(new THREE.Mesh(new THREE.LatheGeometry(V([[0,.145],[.95,.145],[1.1,.13],[1.16,.105],[1.1,.1],[0,.1]]),96),sauce))
+for(let i=0;i<9;i++){const a=i*2.4+.5,r=1.25+(i%3)*.12,m=new THREE.Mesh(new THREE.SphereGeometry(.05+(i%4)*.015,16,12),sauce);m.scale.y=.4;m.position.set(Math.cos(a)*r,.15,Math.sin(a)*r);spin.add(m)}
+// vieiras selladas: dorado arriba y abajo, centro crema, con grano y relieve
+const sear=tex(256,256,x=>{const g=x.createLinearGradient(0,0,0,256);[[0,'#7a4217'],[.3,'#b9783a'],[.42,'#f2dcb8'],[.88,'#f2dcb8'],[1,'#8a5222']].forEach(s=>g.addColorStop(...s));x.fillStyle=g;x.fillRect(0,0,256,256)
+ for(let i=0;i<2500;i++){x.fillStyle=`rgba(${Math.random()<.5?'60,30,10':'255,240,210'},${Math.random()*.18})`;x.fillRect(Math.random()*256,Math.random()*256,2,2)}});sear.encoding=THREE.sRGBEncoding
+const scG=new THREE.LatheGeometry(V([[0,0],[.3,0],[.38,.05],[.41,.16],[.39,.26],[.31,.33],[.17,.36],[0,.37]]),48),scM=new THREE.MeshStandardMaterial({map:sear,bumpMap:sear,bumpScale:.8,roughness:.55}),leafM=new THREE.MeshStandardMaterial({color:0x2e7d32,roughness:.45})
+for(let i=0;i<3;i++){const a=Math.PI/2+i*2.094,g=new THREE.Group();g.add(new THREE.Mesh(scG,scM))
+ const l=new THREE.Mesh(new THREE.SphereGeometry(.07,12,8),leafM);l.scale.set(1.4,.3,.7);l.position.set(.04,.38,0);l.rotation.y=i;g.add(l)
+ g.position.set(Math.cos(a)*.62,.14,Math.sin(a)*.62);g.rotation.set((i-1)*.05,i*1.7,.04*i);spin.add(g)}
+const chM=new THREE.MeshStandardMaterial({color:0xd1220f,roughness:.3}),pep=new THREE.MeshStandardMaterial({color:0x151515,roughness:.5})
+for(let i=0;i<3;i++){const a=i*2.1+.6,m=new THREE.Mesh(new THREE.TorusGeometry(.09,.022,8,20),chM);m.rotation.x=Math.PI/2;m.position.set(Math.cos(a)*.98,.16,Math.sin(a)*.98);spin.add(m)}
+for(let i=0;i<16;i++){const a=i*2.7,r=.35+(i*.37)%1.3,m=new THREE.Mesh(new THREE.SphereGeometry(.028,10,8),pep);m.position.set(Math.cos(a)*r,.165,Math.sin(a)*r);spin.add(m)}
+// campana de cristal con collar metálico
+const cl=new THREE.Group();jar.add(cl)
+const CO=[[1.75,0],[1.75,.04],[1.72,.7],[1.5,1.45],[1,2],[.4,2.28],[.12,2.32]],CI=[[.1,2.26],[.36,2.22],[.94,1.94],[1.44,1.4],[1.66,.7],[1.69,.04],[1.69,0]]
+cl.add(new THREE.Mesh(new THREE.LatheGeometry(V(CO.concat(CI)),72),new THREE.MeshPhysicalMaterial({transmission:1,thickness:.3,roughness:.02,ior:1.5,clearcoat:1,envMapIntensity:2.2,side:2})))
+const collar=new THREE.Mesh(new THREE.TorusGeometry(1.72,.035,10,96),new THREE.MeshStandardMaterial({color:0x2a2a2a,metalness:1,roughness:.25}));collar.rotation.x=Math.PI/2;collar.position.y=.03;cl.add(collar)
+const knob=new THREE.Mesh(new THREE.SphereGeometry(.14,24,16),new THREE.MeshStandardMaterial({color:0xff5a1f,metalness:.7,roughness:.3}));knob.position.y=2.42;cl.add(knob)
+
+// vapor sutil, especias y sombra de contacto
+const soft=tex(64,64,x=>{const g=x.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(0,0,64,64)})
+const shT=tex(128,128,x=>{const g=x.createRadialGradient(64,64,10,64,64,64);g.addColorStop(0,'rgba(0,0,0,.55)');g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.fillRect(0,0,128,128)})
+const sh=new THREE.Mesh(new THREE.PlaneGeometry(6,6),new THREE.MeshBasicMaterial({map:shT,transparent:true,depthWrite:false}));sh.rotation.x=-Math.PI/2;sh.position.y=-.02;jar.add(sh)
+const NS=48,sp=new Float32Array(NS*3),sc=new Float32Array(NS*3),seed=Array.from({length:NS},Math.random),sg=new THREE.BufferGeometry()
+sg.setAttribute('position',new THREE.BufferAttribute(sp,3));sg.setAttribute('color',new THREE.BufferAttribute(sc,3))
+const steam=new THREE.Points(sg,new THREE.PointsMaterial({map:soft,size:.7,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));steam.frustumCulled=false;jar.add(steam)
+const NP=110,pp=new Float32Array(NP*3)
+for(let i=0;i<NP;i++){const r=2.6+Math.random()*1.8,a=Math.random()*6.28;pp.set([Math.cos(a)*r,Math.random()*3.4-.4,Math.sin(a)*r*.6],i*3)}
+const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pp,3))
+const spice=new THREE.Points(pg,new THREE.PointsMaterial({map:soft,size:.08,color:0xffd9b0,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,opacity:.8}));jar.add(spice)
+
+const ptr={x:0,y:0};addEventListener('pointermove',e=>{ptr.x=e.clientX/innerWidth*2-1;ptr.y=-(e.clientY/innerHeight*2-1)})
+const size=()=>{R.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix()};addEventListener('resize',size);size()
+const clock=new THREE.Clock();let lift=0,by=0
+R.setAnimationLoop(()=>{
+ const dt=Math.min(clock.getDelta(),.05),t=clock.elapsedTime,vw=2*8*Math.tan(Math.PI/12)*cam.aspect,dm=(a,b,l)=>a+(b-a)*(1-Math.exp(-l*dt))
+ by=dm(by,S.y,3);jar.position.x=dm(jar.position.x,vw<4.5?0:S.x*vw*.3,3);jar.position.y=.2+by+Math.sin(t*1.2)*.05
+ jar.scale.setScalar(dm(jar.scale.x,S.s*Math.min(1,vw/6.5)*(vw<4.5?1.6:1),3))
+ jar.rotation.x=dm(jar.rotation.x,.55-ptr.y*.08,4);jar.rotation.z=dm(jar.rotation.z,ptr.x*.04,4)
+ spin.rotation.y=dm(spin.rotation.y,t*.18+S.p*Math.PI*3,4)
+ lift=dm(lift,S.l,2.2);cl.position.set(0,.2+lift*3.8,-lift*2)   // la campana sube y sale de cuadro
+ pl.position.set(Math.cos(t*.8)*4,Math.sin(t*.5)*2,Math.sin(t*.8)*4+1)
+ sauce.color.lerp(target,.06)
+ seed.forEach((s,i)=>{const l=(t*.12+s)%1,f=Math.sin(Math.PI*l)*.12*(.6+lift*.8)
+  sp.set([Math.sin(t*.8+s*20)*.22*l+(s-.5)*.8,.5+l*1.9,Math.cos(t*.6+s*10)*.22*l+((s*7)%1-.5)*.8],i*3);sc.set([f,f,f],i*3)})
+ sg.attributes.position.needsUpdate=sg.attributes.color.needsUpdate=true
+ spice.rotation.y+=dt*.1;spice.position.y=Math.sin(t*.7)*.1
+ R.render(scene,cam)})
+
+/* ---------- GSAP ScrollTrigger ---------- */
+ScrollTrigger.create({trigger:document.body,start:'top top',end:'bottom bottom',onUpdate:s=>S.p=s.progress})
+$$('[data-jar]').forEach(el=>ScrollTrigger.create({trigger:el,start:'top 55%',end:'bottom 55%',onToggle:s=>{
+ if(!s.isActive)return;const [x,k,l,y=0]=el.dataset.jar.split(',').map(Number);S.x=x;S.s=k;S.l=l;S.y=y;gsap.to('#bg',{backgroundColor:el.dataset.bg,duration:.8})}}))
+if(!calm){
+ $$('.r>span').forEach(el=>gsap.from(el,{yPercent:105,duration:1.1,delay:+(el.dataset.d||0),ease:'power4.out',scrollTrigger:{trigger:el,start:'top 90%'}}))
+ gsap.to('#par',{yPercent:-25,ease:'none',scrollTrigger:{trigger:'#par',start:'top 15%',end:'bottom top',scrub:true}})
+}
+</script>
+</body></html>
